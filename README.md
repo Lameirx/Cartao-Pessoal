@@ -36,7 +36,7 @@
 
 * Clone o repositório para o seu ambiente local:
 
-* git clone https://github.com/seu-usuario/seu-repositorio.git
+* git clone *https://github.com/seu-usuario/seu-repositorio.git](https://lameirx.github.io/Cartao-Pessoal/*
 
 * Navegue até o diretório do projeto:
 
