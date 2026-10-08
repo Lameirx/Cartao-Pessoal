@@ -19,7 +19,6 @@
   <style>
     * {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      user-select: none;
     }
 
     body {
@@ -235,8 +234,7 @@
         <!-- Avatar com Moldura Glossy -->
         <div class="relative group">
           <div class="avatar-orb w-24 h-24 sm:w-28 sm:h-28 rounded-full p-1.5 border-2 border-white/80 flex items-center justify-center relative overflow-hidden glossy-element">
-            <img 
-             <img src="https://scontent-gru2-2.cdninstagram.com/v/t51.82787-15/782326035_18327954262302423_7430962453294616343_n.webp?_nc_cat=105&ig_cache_key=Mzk3MDQ2Njc5MzI4MTk0NDczNg%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMTQ0MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=1UaF4ZNI8o0Q7kNvwGynP4_&_nc_oc=AdoFXk2P_ul07m9o452-P0HbsKef7CugT_vChZWBMn2yLvMJUvNG6V3ZL6yI_-b4qR8&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-gru2-2.cdninstagram.com&_nc_gid=Ub1nJ93lOs1b_Pt9nra2NA&_nc_ss=7a22e&oh=00_AQNKSvJKYY-DkZXgB9K-cuHXtY5O8NQRFIx1egI_Tmu6gQ&oe=6ACCA5F0" alt="Foto de Perfil" class="w-full h-full object-cover rounded-full shadow-inner" onerror="this.src='https://placehold.co/150x150/0077b6/fff?text=DEV';">
+            <img src="https://scontent-gru2-2.cdninstagram.com/v/t51.82787-15/782326035_18327954262302423_7430962453294616343_n.webp?_nc_cat=105&ig_cache_key=Mzk3MDQ2Njc5MzI4MTk0NDczNg%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMTQ0MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=1UaF4ZNI8o0Q7kNvwGynP4_&_nc_oc=AdoFXk2P_ul07m9o452-P0HbsKef7CugT_vChZWBMn2yLvMJUvNG6V3ZL6yI_-b4qR8&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-gru2-2.cdninstagram.com&_nc_gid=Ub1nJ93lOs1b_Pt9nra2NA&_nc_ss=7a22e&oh=00_AQNKSvJKYY-DkZXgB9K-cuHXtY5O8NQRFIx1egI_Tmu6gQ&oe=6ACCA5F0" alt="Foto de Perfil" class="w-full h-full object-cover rounded-full shadow-inner" onerror="this.src='https://placehold.co/150x150/0077b6/fff?text=DEV';">
           </div>
           <!-- Efeito de brilho adicional ao passar o mouse -->
           <div class="absolute inset-0 rounded-full bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
@@ -389,7 +387,7 @@
               </div>
 
               <div class="flex items-center gap-1 flex-shrink-0">
-                <a href="melissaclameiras@gmail.com" class="p-2 text-sky-800 hover:text-sky-950" title="Enviar e-mail">
+                <a href="mailto:melissaclameiras@gmail.com" class="p-2 text-sky-800 hover:text-sky-950" title="Enviar e-mail">
                   <i class="fa-solid fa-paper-plane text-sm"></i>
                 </a>
                 <button onclick="copyEmail()" class="px-2.5 py-1 rounded-md bg-white/60 hover:bg-white/90 border border-sky-300 text-xs font-bold text-sky-900 shadow-sm flex items-center gap-1 transition-all">
@@ -441,7 +439,7 @@
       tempInput.value = emailText;
       document.body.appendChild(tempInput);
       tempInput.select();
-      document.execCommand('copy');
+      navigator.clipboard.writeText(emailText);
       document.body.removeChild(tempInput);
 
       // Exibe mensagem de confirmação
