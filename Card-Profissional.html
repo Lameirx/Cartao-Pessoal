@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil Profissional - Frutiger Aero</title>
+  
+  <!-- Fontes Segoe UI / Fontes clássicas do estilo Aero -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <!-- Ícones Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Tailwind CSS para utilitários -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    * {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      user-select: none;
+    }
+
+    body {
+      background: linear-gradient(135deg, #004e92 0%, #000428 30%, #005c97 70%, #363795 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Plano de fundo Frutiger Aero (Grama + Céu Luminoso) */
+    .aero-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 0.4) 0%, rgba(0, 168, 255, 0.2) 35%, transparent 70%),
+        linear-gradient(to bottom, #1077c5 0%, #3ca5f4 45%, #92e0ff 70%, #68cf46 88%, #208e13 100%);
+      z-index: -2;
+    }
+
+    /* Efeito de Lens Flare / Brilho Aero */
+    .lens-flare {
+      position: fixed;
+      top: 5%;
+      left: 20%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+      opacity: 0.5;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    /* Estilo do Vidro Windows Aero */
+    .aero-glass {
+      background: rgba(235, 245, 255, 0.45);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      box-shadow: 
+        0 20px 50px rgba(0, 30, 80, 0.4),
+        inset 0 1px 2px rgba(255, 255, 255, 0.9),
+        inset 0 -2px 5px rgba(0, 50, 120, 0.2);
+      border-radius: 16px;
+    }
+
+    /* Barra de Título estilo Windows Vista/7 */
+    .aero-window-header {
+      background: linear-gradient(to bottom, 
+        rgba(255, 255, 255, 0.8) 0%, 
+        rgba(200, 230, 255, 0.5) 45%, 
+        rgba(120, 190, 255, 0.3) 50%, 
+        rgba(180, 225, 255, 0.6) 100%);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+      text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+    }
+
+    /* Efeito Glossy de Plástico/Vidro nos elementos */
+    .glossy-element {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .glossy-element::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 50%;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.65) 0%, rgba(255,255,255,0.1) 100%);
+      border-radius: inherit;
+      pointer-events: none;
+    }
+
+    /* Botões 3D Frutiger Aero */
+    .aero-button {
+      background: linear-gradient(to bottom, #ffffff 0%, #d8eeff 45%, #92cbe6 50%, #b8e6ff 100%);
+      border: 1px solid #5a9cb8;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.9);
+      color: #0b3c5d;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.8);
+    }
+
+    .aero-button:hover {
+      background: linear-gradient(to bottom, #ffffff 0%, #eef7ff 45%, #b2e2f9 50%, #d4f0ff 100%);
+      border-color: #2b789e;
+      box-shadow: 0 0 12px rgba(0, 162, 255, 0.6), inset 0 1px 0 #ffffff;
+      transform: translateY(-1px);
+    }
+
+    .aero-button:active {
+      background: linear-gradient(to bottom, #83c3e6 0%, #a2daf7 50%, #ffffff 100%);
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+      transform: translateY(1px);
+    }
+
+    /* Abas Frutiger Aero */
+    .aero-tab {
+      background: linear-gradient(to bottom, rgba(230, 245, 255, 0.6), rgba(180, 220, 250, 0.4));
+      border: 1px solid rgba(255,255,255,0.7);
+      border-bottom: none;
+      color: #0d4b75;
+      font-weight: 600;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+      transition: all 0.2s ease;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.7);
+    }
+
+    .aero-tab:hover {
+      background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(200, 235, 255, 0.6));
+    }
+
+    .aero-tab.active {
+      background: linear-gradient(to bottom, #ffffff 0%, #f0f8ff 100%);
+      color: #0066cc;
+      border-color: rgba(255,255,255,0.9);
+      box-shadow: 0 -2px 8px rgba(0, 120, 215, 0.3);
+    }
+
+    /* Tag de Skill com brilho de água */
+    .skill-badge {
+      background: linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(180,230,255,0.6) 100%);
+      border: 1px solid rgba(255,255,255,0.9);
+      box-shadow: 0 2px 6px rgba(0,80,160,0.15), inset 0 1px 0 rgba(255,255,255,1);
+      color: #0c4a6e;
+    }
+
+    /* Efeito de orb reflexiva no Avatar */
+    .avatar-orb {
+      background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+      box-shadow: 
+        0 10px 25px rgba(0, 80, 160, 0.3),
+        inset 0 4px 8px rgba(255, 255, 255, 0.9),
+        inset 0 -4px 8px rgba(0, 60, 120, 0.3);
+    }
+
+    /* Animação de entrada suave */
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.3s cubic-bezier(0.1, 0.9, 0.2, 1) forwards;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Custom Scrollbar estilo Windows Vista */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(200, 230, 255, 0.3);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(to bottom, #a0d0f0, #50a0d0);
+      border-radius: 4px;
+      border: 1px solid rgba(255,255,255,0.6);
+    }
+  </style>
+</head>
+<body class="p-4 sm:p-6 relative">
+
+  <!-- Plano de fundo estático Frutiger Aero -->
+  <div class="aero-bg"></div>
+  <div class="lens-flare"></div>
+
+  <!-- Canvas para partículas/bolhas flutuantes -->
+  <canvas id="bubblesCanvas" class="fixed inset-0 pointer-events-none z-[-1]"></canvas>
+
+  <!-- Main Container / Window -->
+  <main class="aero-glass w-full max-w-2xl overflow-hidden shadow-2xl my-auto">
+    
+    <!-- Barra de Título Estilo Vista/7 -->
+    <div class="aero-window-header px-4 py-2.5 flex items-center justify-between">
+      <div class="flex items-center space-x-2">
+        <i class="fa-solid fa-window-restore text-sky-700 text-sm"></i>
+        <span class="text-xs sm:text-sm font-semibold text-sky-950 tracking-wide">
+          Perfil Profissional - Front-end & UX Design
+        </span>
+      </div>
+      <!-- Botões clássicos de janela (Minimizar, Fechar) decorativos -->
+      <div class="flex items-center space-x-1.5">
+        <span class="w-3.5 h-3.5 rounded-full bg-gradient-to-b from-yellow-200 to-yellow-400 border border-yellow-500 shadow-sm inline-block cursor-pointer opacity-80 hover:opacity-100"></span>
+        <span class="w-3.5 h-3.5 rounded-full bg-gradient-to-b from-green-200 to-green-400 border border-green-500 shadow-sm inline-block cursor-pointer opacity-80 hover:opacity-100"></span>
+        <span class="w-3.5 h-3.5 rounded-full bg-gradient-to-b from-red-300 to-red-500 border border-red-600 shadow-sm inline-block cursor-pointer opacity-80 hover:opacity-100"></span>
+      </div>
+    </div>
+
+    <!-- Conteúdo Interno da Janela -->
+    <div class="p-5 sm:p-7">
+
+      <!-- Cabeçalho do Perfil -->
+      <div class="flex flex-col sm:flex-row items-center gap-5 pb-6 border-b border-white/50">
+        
+        <!-- Avatar com Moldura Glossy -->
+        <div class="relative group">
+          <div class="avatar-orb w-24 h-24 sm:w-28 sm:h-28 rounded-full p-1.5 border-2 border-white/80 flex items-center justify-center relative overflow-hidden glossy-element">
+            <img 
+             <img src="https://scontent-gru2-2.cdninstagram.com/v/t51.82787-15/782326035_18327954262302423_7430962453294616343_n.webp?_nc_cat=105&ig_cache_key=Mzk3MDQ2Njc5MzI4MTk0NDczNg%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMTQ0MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=1UaF4ZNI8o0Q7kNvwGynP4_&_nc_oc=AdoFXk2P_ul07m9o452-P0HbsKef7CugT_vChZWBMn2yLvMJUvNG6V3ZL6yI_-b4qR8&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-gru2-2.cdninstagram.com&_nc_gid=Ub1nJ93lOs1b_Pt9nra2NA&_nc_ss=7a22e&oh=00_AQNKSvJKYY-DkZXgB9K-cuHXtY5O8NQRFIx1egI_Tmu6gQ&oe=6ACCA5F0" alt="Foto de Perfil" class="w-full h-full object-cover rounded-full shadow-inner" onerror="this.src='https://placehold.co/150x150/0077b6/fff?text=DEV';">
+          </div>
+          <!-- Efeito de brilho adicional ao passar o mouse -->
+          <div class="absolute inset-0 rounded-full bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+        </div>
+
+        <!-- Nome e Título -->
+        <div class="text-center sm:text-left flex-1">
+          <div class="inline-block px-3 py-0.5 rounded-full bg-white/40 border border-white/60 text-xs font-semibold text-sky-900 mb-1 shadow-sm">
+            <i class="fa-solid fa-sparkles text-amber-500 mr-1"></i> Desenvolvedor & Designer
+          </div>
+          <h1 class="text-2xl sm:text-3xl font-bold text-sky-950 tracking-tight drop-shadow-sm">
+            Melissa Chagas Lameiras
+          </h1>
+          <p class="text-sky-800 font-medium text-sm sm:text-base mt-0.5">
+            Front-end, UX/UI Design & Animação
+          </p>
+          <p class="text-sky-700/90 text-xs mt-1 flex items-center justify-center sm:justify-start gap-1">
+            <i class="fa-solid fa-location-dot text-sky-600"></i> Brasil &bull; Apaixonado por Exatas & Ciência
+          </p>
+        </div>
+      </div>
+
+      <!-- Navegação por Abas Estilo Aero Glass -->
+      <div class="flex space-x-1 mt-6 border-b border-white/60 px-1">
+        <button onclick="switchTab('sobre')" id="tab-sobre" class="aero-tab active px-4 py-2 text-xs sm:text-sm flex items-center gap-2">
+          <i class="fa-solid fa-user-astronaut"></i> Sobre Mim
+        </button>
+        <button onclick="switchTab('skills')" id="tab-skills" class="aero-tab px-4 py-2 text-xs sm:text-sm flex items-center gap-2">
+          <i class="fa-solid fa-code"></i> Habilidades
+        </button>
+        <button onclick="switchTab('contato')" id="tab-contato" class="aero-tab px-4 py-2 text-xs sm:text-sm flex items-center gap-2">
+          <i class="fa-solid fa-paper-plane"></i> Contato
+        </button>
+      </div>
+
+      <!-- Conteúdo das Abas -->
+      <div class="pt-5 min-h-[260px]">
+
+        <!-- ABA SOBRE MIM -->
+        <div id="content-sobre" class="tab-content active space-y-3.5 text-sky-950 text-sm leading-relaxed">
+          <div class="p-4 rounded-xl bg-white/35 border border-white/60 shadow-sm glossy-element">
+            <h3 class="font-bold text-sky-900 text-base mb-2 flex items-center gap-2">
+              <i class="fa-solid fa-laptop-code text-sky-600"></i> Minha Trajetória com a TI
+            </h3>
+            <p class="mb-2">
+              Meu fascínio por tecnologia começou cedo. Desde pequeno, o computador sempre foi meu ambiente natural de exploração e criação. Ainda na infância, criei inúmeros <strong>blogs estilizados com CSS customizado</strong>, onde descobri a magia de transformar código visualmente.
+            </p>
+            <p>
+              Sempre tive um encantamento por <strong>animação, física e interface</strong>. Unir o apelo visual ao comportamento fluido é o que me move na área de Front-end e UX Design.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div class="p-3 rounded-lg bg-white/30 border border-white/50 flex items-start gap-3">
+              <div class="p-2 rounded-lg bg-sky-500/20 text-sky-800 text-lg">
+                <i class="fa-solid fa-atom"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold text-sky-900 text-xs uppercase tracking-wider">Mindset de Exatas</h4>
+                <p class="text-xs text-sky-800 mt-0.5">Pensamento rápido e facilidade com Matemática, Física e Astrofísica.</p>
+              </div>
+            </div>
+
+            <div class="p-3 rounded-lg bg-white/30 border border-white/50 flex items-start gap-3">
+              <div class="p-2 rounded-lg bg-blue-500/20 text-blue-800 text-lg">
+                <i class="fa-solid fa-graduation-cap"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold text-sky-900 text-xs uppercase tracking-wider">Aprendizado Contínuo</h4>
+                <p class="text-xs text-sky-800 mt-0.5">Evolução constante com cursos na Alura e desenvolvimento de projetos pessoais.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ABA HABILIDADES -->
+        <div id="content-skills" class="tab-content space-y-4">
+          <p class="text-xs text-sky-900 font-medium">
+            Combinação de lógica estruturada com criatividade e estética visual:
+          </p>
+
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+            <!-- Skill Items -->
+            <div class="skill-badge p-2.5 rounded-lg flex items-center gap-2.5 font-semibold text-xs sm:text-sm">
+              <i class="fa-brands fa-html5 text-orange-500 text-lg"></i> HTML5 / CSS3
+            </div>
+            <div class="skill-badge p-2.5 rounded-lg flex items-center gap-2.5 font-semibold text-xs sm:text-sm">
+              <i class="fa-brands fa-js text-amber-500 text-lg"></i> JavaScript
+            </div>
+            <div class="skill-badge p-2.5 rounded-lg flex items-center gap-2.5 font-semibold text-xs sm:text-sm">
+              <i class="fa-solid fa-palette text-pink-500 text-lg"></i> UX / UI Design
+            </div>
+            <div class="skill-badge p-2.5 rounded-lg flex items-center gap-2.5 font-semibold text-xs sm:text-sm">
+              <i class="fa-solid fa-wand-magic-sparkles text-purple-500 text-lg"></i> Animações Web
+            </div>
+            <div class="skill-badge p-2.5 rounded-lg flex items-center gap-2.5 font-semibold text-xs sm:text-sm">
+              <i class="fa-solid fa-brain text-emerald-600 text-lg"></i> Raciocínio Lógico
+            </div>
+            <div class="skill-badge p-2.5 rounded-lg flex items-center gap-2.5 font-semibold text-xs sm:text-sm">
+              <i class="fa-solid fa-mobile-screen text-blue-600 text-lg"></i> Design Responsivo
+            </div>
+          </div>
+
+          <!-- Destaque de Interesses -->
+          <div class="p-3.5 rounded-xl bg-gradient-to-r from-sky-400/20 to-blue-500/20 border border-white/60 mt-2">
+            <h4 class="font-bold text-sky-950 text-xs uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+              <i class="fa-solid fa-star text-amber-400"></i> Áreas de Maior Afinidade
+            </h4>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="px-2 py-1 rounded bg-white/50 text-[11px] font-medium text-sky-900">Front-end Development</span>
+              <span class="px-2 py-1 rounded bg-white/50 text-[11px] font-medium text-sky-900">Prototipagem Interativa</span>
+              <span class="px-2 py-1 rounded bg-white/50 text-[11px] font-medium text-sky-900">Micro-interações</span>
+              <span class="px-2 py-1 rounded bg-white/50 text-[11px] font-medium text-sky-900">Astrofísica & Ciência</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ABA CONTATO -->
+        <div id="content-contato" class="tab-content space-y-4">
+          <p class="text-xs text-sky-900 font-medium">
+            Conecte-se comigo!:
+          </p>
+
+          <div class="space-y-3">
+            <!-- LinkedIn Link -->
+            <a href="https://www.linkedin.com/in/melissa-chagas-lameiras-502b352a7/" target="_blank" rel="noopener noreferrer" 
+               class="aero-button w-full p-3 rounded-xl flex items-center justify-between group glossy-element">
+              <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-lg bg-sky-600 text-white flex items-center justify-center text-lg shadow-sm">
+                  <i class="fa-brands fa-linkedin-in"></i>
+                </div>
+                <div class="text-left">
+                  <div class="text-xs text-sky-800 font-medium">Perfil Profissional</div>
+                  <div class="text-sm font-bold text-sky-950">LinkedIn</div>
+                </div>
+              </div>
+              <i class="fa-solid fa-arrow-up-right-from-square text-sky-700 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform mr-2"></i>
+            </a>
+
+            <!-- E-mail / Copiar -->
+            <div class="aero-button w-full p-3 rounded-xl flex items-center justify-between glossy-element">
+              <div class="flex items-center gap-3 overflow-hidden">
+                <div class="w-9 h-9 rounded-lg bg-blue-500 text-white flex items-center justify-center text-lg shadow-sm flex-shrink-0">
+                  <i class="fa-solid fa-envelope"></i>
+                </div>
+                <div class="text-left truncate">
+                  <div class="text-xs text-sky-800 font-medium">E-mail de Contato</div>
+                  <div id="emailText" class="text-xs sm:text-sm font-bold text-sky-950 truncate">melissaclameiras@gmail.com</div>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-1 flex-shrink-0">
+                <a href="melissaclameiras@gmail.com" class="p-2 text-sky-800 hover:text-sky-950" title="Enviar e-mail">
+                  <i class="fa-solid fa-paper-plane text-sm"></i>
+                </a>
+                <button onclick="copyEmail()" class="px-2.5 py-1 rounded-md bg-white/60 hover:bg-white/90 border border-sky-300 text-xs font-bold text-sky-900 shadow-sm flex items-center gap-1 transition-all">
+                  <i class="fa-regular fa-copy"></i> Copiar
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mensagem de feedback ao copiar -->
+          <div id="copyToast" class="hidden text-center p-2 rounded-lg bg-emerald-100/90 border border-emerald-400 text-emerald-900 text-xs font-semibold shadow-sm transition-all">
+            <i class="fa-solid fa-check-circle text-emerald-600 mr-1"></i> E-mail copiado para a área de transferência!
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Rodapé do Card -->
+      <div class="mt-6 pt-4 border-t border-white/50 flex flex-col sm:flex-row items-center justify-between text-xs text-sky-800/80 gap-2">
+        <span class="flex items-center gap-1">
+          <i class="fa-solid fa-droplet text-sky-500"></i> Estilo Frutiger Aero Glossy
+        </span>
+        <span>
+          Front-end &bull; UX &bull; Animações
+        </span>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    /* Lógica de Troca de Abas */
+    function switchTab(tabName) {
+      // Remove classe ativa de todas as abas e conteúdos
+      document.querySelectorAll('.aero-tab').forEach(tab => tab.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+
+      // Ativa a aba e o conteúdo selecionado
+      document.getElementById('tab-' + tabName).classList.add('active');
+      document.getElementById('content-' + tabName).classList.add('active');
+    }
+
+    /* Função para Copiar E-mail */
+    function copyEmail() {
+      const emailText = document.getElementById('emailText').innerText;
+      
+      // Cria elemento temporário para copiar (compatível com iframe)
+      const tempInput = document.createElement('input');
+      tempInput.value = emailText;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempInput);
+
+      // Exibe mensagem de confirmação
+      const toast = document.getElementById('copyToast');
+      toast.classList.remove('hidden');
+      setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 2500);
+    }
+
+    /* Canvas de Bolhas Flutuantes (Frutiger Aero Background) */
+    const canvas = document.getElementById('bubblesCanvas');
+    const ctx = canvas.getContext('2d');
+
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+
+    // Classe da Bolha
+    class Bubble {
+      constructor() {
+        this.reset();
+      }
+
+      reset() {
+        this.x = Math.random() * width;
+        this.y = height + Math.random() * 100;
+        this.radius = Math.random() * 18 + 6;
+        this.speed = Math.random() * 1.2 + 0.4;
+        this.alpha = Math.random() * 0.4 + 0.2;
+        this.drift = Math.random() * 0.6 - 0.3;
+      }
+
+      update() {
+        this.y -= this.speed;
+        this.x += this.drift;
+
+        // Se sair da tela, reinicia
+        if (this.y < -50) {
+          this.reset();
+        }
+      }
+
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        
+        // Gradiente radial para simular reflexo de bolha d'água 3D
+        const gradient = ctx.createRadialGradient(
+          this.x - this.radius * 0.3, 
+          this.y - this.radius * 0.3, 
+          this.radius * 0.1, 
+          this.x, 
+          this.y, 
+          this.radius
+        );
+
+        gradient.addColorStop(0, `rgba(255, 255, 255, ${this.alpha + 0.4})`);
+        gradient.addColorStop(0.4, `rgba(180, 230, 255, ${this.alpha * 0.5})`);
+        gradient.addColorStop(0.8, `rgba(0, 150, 255, ${this.alpha * 0.2})`);
+        gradient.addColorStop(1, `rgba(255, 255, 255, ${this.alpha * 0.6})`);
+
+        ctx.fillStyle = gradient;
+        ctx.fill();
+
+        // Borda brilhante suave
+        ctx.strokeStyle = `rgba(255, 255, 255, ${this.alpha * 0.7})`;
+        ctx.lineWidth = 0.8;
+        ctx.stroke();
+
+        // Ponto de luz da bolha
+        ctx.beginPath();
+        ctx.arc(this.x - this.radius * 0.4, this.y - this.radius * 0.4, this.radius * 0.2, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${this.alpha + 0.3})`;
+        ctx.fill();
+      }
+    }
+
+    // Criar array de bolhas
+    const bubbles = Array.from({ length: 35 }, () => new Bubble());
+
+    // Loop de animação
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+      bubbles.forEach(bubble => {
+        bubble.update();
+        bubble.draw();
+      });
+      requestAnimationFrame(animate);
+    }
+
+    window.onload = function() {
+      animate();
+    };
+  </script>
+</body>
+</html>
